@@ -1,0 +1,79 @@
+========================================
+SMART BUS SYSTEM - TEST CASES RECORD
+========================================
+
+TC-01: View all routes
+Input/Action : Menu option 1, filter = n
+Expected     : All 5 routes (R101-R105) with seat status
+Actual       : All 5 routes displayed with availability
+Matched      : YES
+
+TC-02: Search Hyderabad
+Input/Action : Menu option 2, search "Hyderabad"
+Expected     : Routes departing/arriving Hyderabad (R101, R103, R105)
+Actual       : R101, R103, R105 listed
+Matched      : YES
+
+TC-03: Unknown city
+Input/Action : Menu option 2, search "Atlantis"
+Expected     : No-match message; program continues
+Actual       : "No routes matched 'Atlantis'."
+Matched      : YES
+
+TC-04: Book 2 seats
+Input/Action : Menu option 3: Ahmed, 24, R101, 2 seats
+Expected     : Fare Rs. 2400 confirmed; R101 avail 40->38
+Actual       : B1001 confirmed, Rs. 2400, R101 now 38/40
+Matched      : YES
+
+TC-05: Zero seats
+Input/Action : Book with 0 seats
+Expected     : Reject; no change
+Actual       : "Seat quantity must be positive" - no change
+Matched      : YES
+
+TC-06: Too many seats
+Input/Action : Request more than available
+Expected     : Reject; availability never negative
+Actual       : "Only X seats available" - no change
+Matched      : YES
+
+TC-07: Cancel confirmed booking
+Input/Action : Cancel booking B1001
+Expected     : Status Cancelled; seats restored
+Actual       : Status = Cancelled; R101 avail +2
+Matched      : YES
+
+TC-08: Cancel same booking again
+Input/Action : Cancel B1001 again
+Expected     : Reject; no double restoration
+Actual       : "Booking already cancelled"
+Matched      : YES
+
+TC-09: Report with no bookings
+Input/Action : Fresh run, generate report
+Expected     : Totals 0; route status counted
+Actual       : All counts 0, fully booked = 0
+Matched      : YES
+
+TC-10: Book all seats
+Input/Action : Book all 40 seats on R101
+Expected     : Success; availability = 0; Fully Booked
+Actual       : Confirmed; R101 shows 0/40 Fully Booked
+Matched      : YES
+
+TC-11: Report after cancellation
+Input/Action : Cancel a booking then generate report
+Expected     : Cancelled count +1; revenue excludes it
+Actual       : Cancelled = 1; revenue adjusted
+Matched      : YES
+
+TC-12: Invalid menu option
+Input/Action : Enter "abc" or "99"
+Expected     : Error message; menu returns
+Actual       : "Invalid choice. Please enter 1-9"
+Matched      : YES
+
+========================================
+Legend: YES = test passed, NO = needs fix
+========================================
